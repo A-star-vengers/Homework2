@@ -78,6 +78,9 @@ celerybeat-schedule
 # dotenv
 .env
 
+# flask
+flask/
+
 # virtualenv
 venv/
 ENV/
