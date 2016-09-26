@@ -4,7 +4,7 @@ from app.db import db
 from app.dbmodels import User
 from app.util import validate_table, getsalt, createhash
 
-register_form = ['username', 'email', 'password', 'confirm-password']
+register_form = ['username', 'email', 'password', 'confirm']
 login_form = ['username', 'password']
 
 @app.route('/')
@@ -44,7 +44,7 @@ def register():
             username = request.form['username']
             email = request.form['email']
             password = request.form['password']
-            confirm = request.form['confirm-password']
+            confirm = request.form['confirm']
 
             if password != confirm:
                 #Add template logic for invalid registration.
