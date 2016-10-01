@@ -1,0 +1,178 @@
+\documentclass[10pt]{article}
+
+\begin{filecontents*}{\jobname.bib}
+  @article{Bessey2010,
+   author = {Bessey, Al and Block, Ken and Chelf, Ben and Chou, Andy and Fulton, Bryan and Hallem, Seth and Henri-Gros, Charles and Kamsky, Asya and McPeak, Scott and Engler, Dawson},
+   title = {A Few Billion Lines of Code Later: Using Static Analysis to Find Bugs in the Real World},
+   journal = {Commun. ACM},
+   volume = {53},
+   number = {2},
+   year = {2010},
+   pages = {66--75},
+   url = "http://dx.doi.org/10.1145/1646353.1646374",
+   publisher = {ACM},
+   address = {New York, NY, USA},
+  }
+  
+  @inproceedings{Rutar2004,
+   author = {Rutar, Nick and Almazan, Christian B. and Foster, Jeffrey S.},
+   title = {A Comparison of Bug Finding Tools for Java},
+   booktitle = {Proceedings of the 15th International Symposium on Software Reliability Engineering},
+   series = {ISSRE '04},
+   year = {2004},
+   pages = {245--256},
+   numpages = {12},
+   url = {http://dx.doi.org/10.1109/ISSRE.2004.1},
+   publisher = {IEEE Computer Society},
+   address = {Washington, DC, USA},
+  }
+
+
+\end{filecontents*}
+
+\usepackage[left=1in,right=1in,bottom=1in,top=1in]{geometry}
+% \usepackage{fancyvrb}
+\usepackage{listings}
+\lstset{
+basicstyle=\small\ttfamily,
+columns=flexible,
+breaklines=true
+}
+
+
+\usepackage{mdframed}
+\usepackage{commath}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{tikz}
+
+\usetikzlibrary{external}
+\usetikzlibrary{plotmarks}
+\usepackage{pgfplots}
+\usepackage{standalone} % http://tex.stackexchange.com/questions/11583/insert-a-tikz-picture-from-an-external-file
+
+\usepackage{multirow}
+\usepackage{subfloat}
+\usepackage{caption}
+% \usepackage[nolists]{endfloat}
+
+\interfootnotelinepenalty=10000
+\usepackage[hyperref, doi, 
+            style      =authoryear-icomp,
+            bibstyle   =authoryear,
+            url        =true, % false, 
+            natbib     =true,
+            maxbibnames=99]{biblatex}
+
+\bibliography{\jobname.bib}
+\renewbibmacro{in:}{}
+\renewbibmacro{in:}{}
+
+\hypersetup{
+    bookmarks=true,         % show bookmarks bar?
+    unicode=false,          % non-Latin characters in Acrobat’s bookmarks
+    pdffitwindow=false,     % window fit to page when opened
+    pdfstartview={},    % fits the width of the page to the window
+    pdftitle={},    % title
+    pdfauthor={Kyle Matoba, km3227@columbia.edu},     % author
+    pdfsubject={},   % subject of the document
+    pdfcreator={},   % creator of the document
+    pdfproducer={}, % producer of the document
+    pdfkeywords={} {} {}, % list of keywords
+    pdfnewwindow=true,      % links in new window
+    colorlinks=true,       % false: boxed links; true: olored links
+    linkcolor=black,          % color of internal links
+    citecolor=black,        % color of links to bibliography
+    filecolor=black,      % color of file links
+    urlcolor=black         % color of external links
+}
+
+\theoremstyle{remark}
+
+\newtheorem{definition}{Definition}
+\newtheorem{axiom}{Axiom}
+\newtheorem{remark}{Remark}
+\newtheorem{assumption}{Assumption}
+\newtheorem{example}{Example}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{result}{Result}
+\newtheorem{fact}{Fact}
+\newtheorem{hypothesis}{Hypothesis}
+
+\numberwithin{equation}{section}
+
+\newcommand{\tikzcircle}[2][red,fill=red]{\tikz[baseline=-0.5ex]\draw[#1,radius=#2] (0,0) circle ;}%
+\newcommand{\blackcircle}{\tikzcircle[black, fill=black]{1.5pt}}
+\newcommand{\whitecircle}{\tikzcircle[black, fill=white]{1.5pt}}
+
+
+\newcommand{\remarkname}{Remark}
+\newcommand{\lemmaname}{Lemma}
+\newcommand{\assumptionname}{Assumption}
+\newcommand{\definitionname}{Definition}
+\newcommand{\hypothesisname}{Hypothesis}
+
+\def\subsubsectionautorefname{Section}  
+\def\subsectionautorefname{Section}  
+\def\sectionautorefname{Section}  
+
+\def\equationautorefname{Equation \hspace{-.15cm}}  
+
+% http://www.tug.org/applications/hyperref/manual.html#TBL-23
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\minimize}{minimize}
+\DeclareMathOperator*{\maximize}{maximize}
+
+\newcommand{\sign}{\textnormal{sign}}
+\newcommand{\sd}{\textnormal{sd}}
+\newcommand{\diag}{\textnormal{diag}}
+\newcommand{\tr}{\textnormal{tr}}
+\newcommand{\naive}{na\"{\i}ve\ }
+
+\newcommand{\floor}[1]{ \left\lfloor #1 \right\rfloor}
+\newcommand{\ceiling}[1]{ \left\lceil #1 \right\rceil}
+\renewcommand{\hat}{\widehat}
+\renewcommand{\tilde}{\widetilde}
+\renewcommand{\d}{\textsc{d}}
+\newcommand{\cov}{\textsc{cov}}
+\newcommand{\var}{\textsc{var}}
+\setlength{\parindent}{0cm}
+
+\begin{document}
+
+\title{Practice with Development Technologies: Homework 2 }
+
+\author{
+Andrew Calvano\thanks{Email: \href{mailto:arc2205@columbia.edu}{\texttt{arc2205@columbia.edu}}} \\ 
+Kyle Matoba\thanks{Email: \href{mailto:km3227@columbia.edu}{\texttt{km3227@columbia.edu}}}
+}
+\date{}
+\maketitle
+
+
+
+% You should work together with your pair partner from your team; each pair in the team needs to do this assignment and submit separately.
+% Build a toy system using your team's selected programming language, development framework, and other technologies.You can start with some existing program, e.g., from your static analysis assignment, that you port into the framework or you can write something new.  It does not have to do much. It just needs to use your development framework (which means it needs a front-end, a couple screens are fine), build, and "pass" static analysis and a few simple tests.  It should store something persistently and be able to read and update that data again later.Post your code, build scripts, test cases, etc. on github.   Submit a single file, 1-2 pages, that tells us the url for this github repository, briefly describes your toy system, and discusses your experience using each part of your team's chosen technology.  Did you run into any challenges?  Was there anything you wanted to do but couldn't get working?The name of this file should include both your team name and pair unis.  For example, AwesomeChairs_jbh2019_ras2105_homework2.pdf.  You should submit as soon as possible after you are done, you do not need to wait for the deadline.  If relevant, you can resubmit repeatedly until the deadline.
+% 2:03 (from: https://courseworks2.columbia.edu/courses/10832/assignments/39206)
+% 
+
+\section{Background} 
+
+\url{https://github.com/A-star-vengers/Homework2} 
+\subsection{Code}
+
+
+% \nocite{Rutar2004}
+% \pagebreak 
+\begin{spacing}{0.9}
+\printbibliography
+\end{spacing}
+
+\end{document}
+
