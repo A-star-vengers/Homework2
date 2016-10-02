@@ -15,9 +15,12 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/state')
+@app.route('/state', methods=['GET', 'POST'])
 def state():
     state = 'foo'
+    if request.method == 'POST':
+        state = request.form['state']
+
     return render_template('state.html', state=state)
 
 
