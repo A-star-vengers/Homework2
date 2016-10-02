@@ -1,5 +1,5 @@
 from app.db import db
-from app import app
+from app import app # flake8: noqa
 
 class User(db.Model):
     """Class to represent the Users table.  This table
