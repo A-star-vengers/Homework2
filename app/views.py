@@ -9,13 +9,14 @@ login_form = ['username', 'password']
 
 app.secret_key = 'foobar'
 
+
 @app.route('/')
 def index():
     return render_template('index.html')
 
 
 @app.route('/state')
-def state(): 
+def state():
     state = 'foo'
     return render_template('state.html', state=state)
 
@@ -36,7 +37,7 @@ def login():
             if user_exists:
                 if createhash(user_exists.salt, password) ==\
                    user_exists.password:
-		    session['logged_in'] = True
+                    session['logged_in'] = True
                     return 'Login successful'
 
             return 'Login POST'
