@@ -90,6 +90,8 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+*.swp
 a-star-vengers_arc2205_km3227_homework2-blx.bib
 a-star-vengers_arc2205_km3227_homework2.aux
 a-star-vengers_arc2205_km3227_homework2.bib

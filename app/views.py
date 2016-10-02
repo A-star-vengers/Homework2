@@ -1,4 +1,4 @@
-from flask import render_template, request
+from flask import render_template, request, session
 from app import app
 from app.db import db
 from app.dbmodels import User
@@ -7,15 +7,21 @@ from app.util import validate_table, getsalt, createhash
 register_form = ['username', 'email', 'password', 'confirm']
 login_form = ['username', 'password']
 
+app.secret_key = 'foobar'
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
 
+@app.route('/state')
+def state(): 
+    state = 'foo'
+    return render_template('state.html', state=state)
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-
     if request.method == 'POST':
         if validate_table(login_form, request.form):
 
@@ -30,6 +36,7 @@ def login():
             if user_exists:
                 if createhash(user_exists.salt, password) ==\
                    user_exists.password:
+		    session['logged_in'] = True
                     return 'Login successful'
 
             return 'Login POST'
