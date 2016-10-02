@@ -19,3 +19,16 @@ class User(db.Model):
         self.email = email
         self.salt = salt
         self.password = password
+
+class State(db.Model):
+    """Class to represent the State table. This table
+       contains the current state value for a particular user
+    """
+    __tablename__ = "state"
+    sid = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    uname = db.Column(db.String(45), db.ForeignKey("user.uname", onupdate="cascade"), nullable=False)
+    state = db.Column(db.String(255), unique=False)
+
+    def __init__(self, uname, state):
+        self.uname = uname
+        self.state = state

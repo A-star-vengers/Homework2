@@ -1,7 +1,7 @@
-from flask import render_template, request, session
+from flask import render_template, request, session, redirect, url_for
 from app import app
 from app.db import db
-from app.dbmodels import User
+from app.dbmodels import User, State
 from app.util import validate_table, getsalt, createhash
 
 register_form = ['username', 'email', 'password', 'confirm']
@@ -9,20 +9,31 @@ login_form = ['username', 'password']
 
 app.secret_key = 'foobar'
 
-
 @app.route('/')
 def index():
-    return render_template('index.html')
-
+    return render_template('index.html', session=session)
 
 @app.route('/state', methods=['GET', 'POST'])
 def state():
+
+    if 'logged_in' not in session:
+        return redirect(url_for('index'))
+
     state = 'foo'
+
+    state_entry = State.query.filter_by(uname=session['username']).first()
+
+    if state_entry is not None:
+        state = state_entry.state
+
     if request.method == 'POST':
         state = request.form['state']
 
-    return render_template('state.html', state=state)
+        newState = State(session['username'], state)
+        db.session.add(newState)
+        db.session.commit()
 
+    return render_template('state.html', state=state)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -41,6 +52,7 @@ def login():
                 if createhash(user_exists.salt, password) ==\
                    user_exists.password:
                     session['logged_in'] = True
+                    session['username'] = username
                     return 'Login successful'
 
             return 'Login POST'
@@ -49,6 +61,14 @@ def login():
     else:
         return render_template('login.html')
 
+@app.route('/logout', methods=['GET'])
+def logout():
+
+    if 'logged_in' not in session:
+        return redirect(url_for('index'))
+
+    session.clear()
+    return redirect(url_for('index'))
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
