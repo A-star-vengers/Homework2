@@ -9,9 +9,11 @@ login_form = ['username', 'password']
 
 app.secret_key = 'foobar'
 
+
 @app.route('/')
 def index():
     return render_template('index.html', session=session)
+
 
 @app.route('/state', methods=['GET', 'POST'])
 def state():
@@ -34,6 +36,7 @@ def state():
         db.session.commit()
 
     return render_template('state.html', state=state)
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -61,6 +64,7 @@ def login():
     else:
         return render_template('login.html')
 
+
 @app.route('/logout', methods=['GET'])
 def logout():
 
@@ -69,6 +73,7 @@ def logout():
 
     session.clear()
     return redirect(url_for('index'))
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
