@@ -133,7 +133,7 @@ breaklines=true
 \newcommand{\sd}{\textnormal{sd}}
 \newcommand{\diag}{\textnormal{diag}}
 \newcommand{\tr}{\textnormal{tr}}
-\newcommand{\naive}{na\"{\i}ve\ }
+\newcommand{\nnaive}{na\"{\i}ve\ }
 
 \newcommand{\floor}[1]{ \left\lfloor #1 \right\rfloor}
 \newcommand{\ceiling}[1]{ \left\lceil #1 \right\rceil}
@@ -160,7 +160,7 @@ Kyle Matoba\thanks{Email: \href{mailto:km3227@columbia.edu}{\texttt{km3227@colum
 % You should work together with your pair partner from your team; each pair in the team needs to do 
 % this assignment and submit separately.
 % Build a toy system using your team's selected programming language, development framework, and 
-% other technologies.You can start with some existing program, e.g., from your static analysis 
+% other technologies. You can start with some existing program, e.g., from your static analysis 
 % assignment, that you port into the framework or you can write something new.  It does not have 
 % to do much. It just needs to use your development framework (which means it needs a front-end,
 % a couple screens are fine), build, and "pass" static analysis and a few simple tests.  It should 
@@ -172,11 +172,44 @@ Kyle Matoba\thanks{Email: \href{mailto:km3227@columbia.edu}{\texttt{km3227@colum
 % The name of this file should include both your team name and pair unis. 
 % You should submit as soon as possible after you are done, you do not need to wait for the deadline.
 
-\section{Background} 
+\section{} 
 
-\url{https://github.com/A-star-vengers/Homework2} 
-\subsection{}
+\subsection{Executive Summary}
 
+We got the following technologies to all work together nicely to meet the specs of the assignment:
+
+\begin{itemize} 
+\item flakes8 (pep8 [style checker] and pyflakes [static analyser] and a cyclomatic complexity checker)
+\item flask (Jinja2 [templating engine] and Werkzeug [Web Server Gateway Interface utility])
+\item SQLAlchemy [SQL toolkit and object-relational mapper] and sqlite [SQL database]
+\item unittest [unit testing] and Flask-testing [unit testing tools that ease automatically exercising the logic]
+\item virtualenv, pip, and Travis CI
+\end{itemize} 
+
+The code is at: \url{https://github.com/A-star-vengers/Homework2}. As may be evident from the commit history, the story of the code can roughly be stated as: ``Andrew put up a bare-bones flask app,\footnote{i.e. what might be downloaded from \url{https://github.com/realpython/discover-flask/tree/part11}} we added a simple state that is persisted across sessions, by user (just a string, with no checking of any kind), added a Travis CI \texttt{.travis.yml} file, and some flakes8 checks, which turned up some small-ish problems (some pep8, some pyflakes) that we were obliged to fix in order to get a clean build. 
+
+\subsection{Bare bones run} 
+
+If you want to run our app, you can look at the build steps at \url{https://travis-ci.org/A-star-vengers/Homework2}, or assuming you have python 2.7 + virtualenv, a C compiler (needed for some of the authentication packages), and git installed, you can do something like:
+
+\begin{verbatim} 
+git clone https://github.com/A-star-vengers/Homework2.git
+cd Homework2
+virtualenv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python run.py
+\end{verbatim} 
+
+Then navigate to localhost, port 5000 (or whatever URL is displayed in the console in your browser). To run the tests, run \texttt{python test.py}.
+
+\subsection{More Detail}
+As we detailed in our first submission, we propose building a web app to construct and play crossword puzzles socially. Our technology is built atop Flask, using SQLAlchemy for database management. This project consisted of a simple Flask server, along with necessary front-end pages, that allow a user to register an account, sign in, sign out, and change a state that persists across sessions (the last meant to mock up general business logic to follow later). The code is kept under version control on GitHub, andis built on every commit using Travis CI, this means that (starting from a clean state), the code is cloned, necessary dependencies are downloaded and compiled, the code undergoes static analysis and a style check, and unit tests are run. 
+
+% In the process of completing the project, we learned that pyflakes is actually not so hot for static analysis, 
+
+\subsection{Next steps} 
+Our app is meant to maximally spec out different technologies we will have to use in the final project, not to exhibit any nontrivial logic. So, we succeeded in covering a really quite a nontrivial workflow: users can create accounts and log in securely, and update a state persistent across sessions, the code is built and tested automatically using powerful CI tools. However, it remains to fill in this skeleton with the logic necessary to fully implement our project. 
 
 % \nocite{Rutar2004}
 % \pagebreak 
