@@ -43,7 +43,7 @@ class RegisterTest(AppTest):
                         confirm='test'
         ), follow_redirects=True)
 
-        assert 'Register POST' in response.data
+        assert 'Registration successful' in response.data
 
 class RegisterAndLoginTest(AppTest):
 
@@ -56,7 +56,7 @@ class RegisterAndLoginTest(AppTest):
                         confirm='test'
         ), follow_redirects=True)
 
-        assert 'Register POST' in response.data
+        assert 'Registration successful' in response.data
 
         response = self.client.post('/login', data = dict(
                         username='test',
@@ -76,7 +76,7 @@ class StateTest(AppTest):
                         confirm='test'
         ), follow_redirects=True)
 
-        assert 'Register POST' in response.data
+        assert 'Registration successful' in response.data
 
         response = self.client.post('/login', data = dict(
                         username='test',
@@ -103,8 +103,6 @@ class StateTest(AppTest):
                         username='test',
                         password='test'
         ), follow_redirects=True)
-
-        print response.data
 
         assert 'Login successful' in response.data
 

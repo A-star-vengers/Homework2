@@ -56,11 +56,14 @@ def login():
                    user_exists.password:
                     session['logged_in'] = True
                     session['username'] = username
-                    return 'Login successful'
+                    return render_template(
+                                            'index.html',
+                                            message='Login successful'
+                                          )
 
-            return 'Login POST'
+            return redirect(url_for('login'))
         else:
-            return 'Bad Login POST request arguments.'
+            return redirect(url_for('login'))
     else:
         return render_template('login.html')
 
@@ -88,15 +91,18 @@ def register():
 
             if password != confirm:
                 # Add template logic for invalid registration.
-                render_template('login.html')
+                return redirect(url_for('login'))
 
             salt = getsalt()
             passhash = createhash(salt, password)
             newUser = User(username, email, salt, passhash)
             db.session.add(newUser)
             db.session.commit()
-            return 'Register POST'
+            return render_template(
+                                    'index.html',
+                                    message='Registration successful'
+                                  )
         else:
-            return 'Bad Register POST request arguments.'
+            return redirect(url_for('login'))
     else:
         return render_template('login.html')
