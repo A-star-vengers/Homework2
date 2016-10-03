@@ -155,8 +155,6 @@ Kyle Matoba\thanks{Email: \href{mailto:km3227@columbia.edu}{\texttt{km3227@colum
 \date{}
 \maketitle
 
-
-
 % You should work together with your pair partner from your team; each pair in the team needs to do 
 % this assignment and submit separately.
 % Build a toy system using your team's selected programming language, development framework, and 
@@ -204,9 +202,10 @@ python run.py
 Then navigate to localhost, port 5000 (or whatever URL is displayed in the console in your browser). To run the tests, run \texttt{python test.py}.
 
 \subsection{More Detail}
-As we detailed in our first submission, we propose building a web app to construct and play crossword puzzles socially. Our technology is built atop Flask, using SQLAlchemy for database management. This project consisted of a simple Flask server, along with necessary front-end pages, that allow a user to register an account, sign in, sign out, and change a state that persists across sessions (the last meant to mock up general business logic to follow later). The code is kept under version control on GitHub, andis built on every commit using Travis CI, this means that (starting from a clean state), the code is cloned, necessary dependencies are downloaded and compiled, the code undergoes static analysis and a style check, and unit tests are run. 
+As we detailed in our first submission, we propose building a web app to construct and play crossword puzzles socially. Our technology is built atop Flask, using SQLAlchemy for database management. This project consisted of a simple Flask server, along with necessary front-end pages, that allow a user to register an account, sign in, sign out, and change a state that persists across sessions (meant to mock up general business logic to follow later). The code is kept under version control on GitHub, and is built on every commit using Travis CI, this means that (starting from a clean state), the code is cloned, necessary dependencies are downloaded and compiled, the code undergoes static analysis and a style check, and unit tests are run. 
 
-% In the process of completing the project, we learned that pyflakes is actually not so hot for static analysis, 
+This assignment was well thought out: it obliged us to separate the framework from the logic of our particular app and thereby gave us a great start on our eventual program, this is really the essence of the difference between an advanced course in software development and a first course in coding. Nothing was especially challenging, and we were able to pretty straightforwardly get everything we wanted working (Andrew had some previous experience with Flask). We learned a bit about technologies that we had not used before, for example we initially used Pyflakes and pep8 as protoypical static checking. However, we found that pyflakes raised false positives, and moreover did not have a simple primitive way to overrule (build-blocking) flags.\footnote{Leading some, to suggest entirely disgusting workarounds. For example, \url{http://chase-seibert.github.io/blog/2013/01/11/bypass_pyflakes.html}.} In navigating this hiccup, we learned about a tool that no one in our team had initially suggested, flake8, which combines both (and another) checkers, and more to our point, allows lint-style structured comments instructing the checker to forgive the ordinary checks (the ``\verb|# flake8: noqa|'' in \url{https://github.com/A-star-vengers/Homework2/blob/master/app/__init__.py#L5}). We also learned how to use Travis CI, and moreover learned that it is amazingly lightweight and simple, compared to Jenkins.
+
 
 \subsection{Next steps} 
 Our app is meant to maximally spec out different technologies we will have to use in the final project, not to exhibit any nontrivial logic. So, we succeeded in covering a really quite a nontrivial workflow: users can create accounts and log in securely, and update a state persistent across sessions, the code is built and tested automatically using powerful CI tools. However, it remains to fill in this skeleton with the logic necessary to fully implement our project. 
